@@ -3,8 +3,7 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/6de2eb23249ef4c8a60c/test_coverage)](https://codeclimate.com/github/aurasphere/gomorra-sql/test_coverage)
 [![Join the chat at https://gitter.im/gomorra-sql/community](https://badges.gitter.im/gomorra-sql/community.svg)](https://gitter.im/gomorra-sql/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-orange.svg)](https://www.paypal.com/donate/?cmd=_donations&business=8UK2BZP2K8NSS)
-
-Italian Telegram group: https://t.me/+Wy1DPTLyFGg0OWE0
+[![Telegram](https://img.shields.io/badge/-telegram-a?color=white&logo=telegram)](https://t.me/+Wy1DPTLyFGg0OWE0)
 
 ![logo](https://user-images.githubusercontent.com/14991778/117669306-0a931c00-b1a7-11eb-8db8-babc14e767d1.png)
 
