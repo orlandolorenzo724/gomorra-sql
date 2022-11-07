@@ -135,7 +135,7 @@ If you have an issued certification, you can check it out at the following URL b
 This project is considered completed and won't be developed further.
 
 ## Contacts
-You can contact me using my account e-mail or by joining the Telegram group. I'll try to reply ASAP.
+You can contact me using my account e-mail or by joining the Telegram group (link on the badge on top of this document). I'll try to reply ASAP.
 
 ## Acknowledgments
 Thanks to [Federica Lisci](https://www.linkedin.com/in/federica-lisci-377220162/) for the logo!
