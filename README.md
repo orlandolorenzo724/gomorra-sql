@@ -131,14 +131,11 @@ Video lessons on GomorraSQL syntax and philosophy [are available here](https://w
 ## Certifications
 If you have an issued certification, you can check it out at the following URL by replacing the "user" parameter with your name (replace spaces with hyphens): https://aurasphere.co/gomorra-sql/certificate.html?user=donato-rimenti.
 
-## Contributions
-Improvements are always appreciated! If you want to contribute to this project though, remember to open an issue with your suggestion before doing any changes. This will help you avoid working on something that won't get merged.
-
 ## Project status
 This project is considered completed and won't be developed further.
 
 ## Contacts
-You can contact me using my account e-mail or opening an issue on this repo. I'll try to reply ASAP.
+You can contact me using my account e-mail or by joining the Telegram group. I'll try to reply ASAP.
 
 ## Acknowledgments
 Thanks to [Federica Lisci](https://www.linkedin.com/in/federica-lisci-377220162/) for the logo!
