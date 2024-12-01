@@ -1,5 +1,8 @@
 package co.aurasphere.gomorrasql.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.sql.ResultSet;
 
 /**
@@ -8,26 +11,12 @@ import java.sql.ResultSet;
  * @author Donato Rimenti
  *
  */
+@Setter
+@Getter
 public class GomorraSqlQueryResult {
 	
 	private Integer affectedRows;
 	
 	private ResultSet resultSet;
-
-	public Integer getAffectedRows() {
-		return affectedRows;
-	}
-
-	public void setAffectedRows(Integer affectedRows) {
-		this.affectedRows = affectedRows;
-	}
-
-	public ResultSet getResultSet() {
-		return resultSet;
-	}
-
-	public void setResultSet(ResultSet resultSet) {
-		this.resultSet = resultSet;
-	}
 
 }
