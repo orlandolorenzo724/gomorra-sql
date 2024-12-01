@@ -2,13 +2,15 @@ package co.aurasphere.gomorrasql.states.query;
 
 import java.util.Arrays;
 
-import co.aurasphere.gomorrasql.Keywords;
+import co.aurasphere.gomorrasql.constants.Keywords;
 import co.aurasphere.gomorrasql.model.MannaggGiudException;
 import co.aurasphere.gomorrasql.model.QueryInfo;
 import co.aurasphere.gomorrasql.states.AbstractState;
 import co.aurasphere.gomorrasql.states.AnyTokenConsumerState;
 import co.aurasphere.gomorrasql.states.SingleTokenMatchState;
 import co.aurasphere.gomorrasql.states.where.WhereFieldState;
+
+import static co.aurasphere.gomorrasql.constants.Symbols.COMMA_SYMBOL;
 
 /**
  * State for an update when the first value is set. Allows to continue setting
@@ -26,7 +28,7 @@ public class UpdateSetState extends AbstractState {
 	@Override
 	public AbstractState transitionToNextState(String token) throws MannaggGiudException {
 		// Adds another variable
-		if (token.equalsIgnoreCase(",")) {
+		if (token.equalsIgnoreCase(COMMA_SYMBOL)) {
 			return new AnyTokenConsumerState(queryInfo, queryInfo::addColumnName,
 					q -> new SingleTokenMatchState(q, Keywords.SET_EQUAL_KEYWORD,
 							q2 -> new AnyTokenConsumerState(q2, q2::addValue, UpdateSetState::new)));
@@ -35,7 +37,7 @@ public class UpdateSetState extends AbstractState {
 		if (token.equalsIgnoreCase(Keywords.WHERE_KEYWORD)) {
 			return new WhereFieldState(queryInfo);
 		}
-		throw new MannaggGiudException(Arrays.asList(",", Keywords.WHERE_KEYWORD, "%END_OF_QUERY%"), token);
+		throw new MannaggGiudException(Arrays.asList(COMMA_SYMBOL, Keywords.WHERE_KEYWORD, "%END_OF_QUERY%"), token);
 	}
 
 	@Override

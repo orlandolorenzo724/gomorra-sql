@@ -1,10 +1,10 @@
 package co.aurasphere.gomorrasql.states.query;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
-import co.aurasphere.gomorrasql.Keywords;
+import co.aurasphere.gomorrasql.constants.Keywords;
 import co.aurasphere.gomorrasql.model.MannaggGiudException;
 import co.aurasphere.gomorrasql.model.QueryInfo;
 import co.aurasphere.gomorrasql.model.QueryInfo.QueryType;
@@ -28,23 +28,41 @@ public class OptionalWhereState extends AbstractState {
 
 	@Override
 	public AbstractState transitionToNextState(String token) throws MannaggGiudException {
-		List<String> expectedKeywords = new ArrayList<>(Arrays.asList(Keywords.WHERE_KEYWORD));
+		List<String> expectedKeywords = getExpectedKeywords();
+
 		if (token.equalsIgnoreCase(Keywords.WHERE_KEYWORD)) {
 			return new WhereFieldState(queryInfo);
 		}
-		if (queryInfo.getType().equals(QueryType.SELECT)) {
-			expectedKeywords.add(Keywords.JOIN_KEYWORDS[0]);
-			if (token.equalsIgnoreCase(Keywords.JOIN_KEYWORDS[0])) {
-				return new GreedyMatchKeywordState(queryInfo, Keywords.JOIN_KEYWORDS,
-						q -> new AnyTokenConsumerState(q, q::addJoinedTable, OptionalWhereState::new));
-			}
+
+		if (isSelectQuery() && token.equalsIgnoreCase(Keywords.JOIN_KEYWORDS[0])) {
+			return createJoinState();
 		}
+
 		throw new MannaggGiudException(expectedKeywords, token);
+	}
+
+	private List<String> getExpectedKeywords() {
+		List<String> expectedKeywords = new ArrayList<>(Collections.singletonList(Keywords.WHERE_KEYWORD));
+		if (isSelectQuery()) {
+			expectedKeywords.add(Keywords.JOIN_KEYWORDS[0]);
+		}
+		return expectedKeywords;
+	}
+
+	private boolean isSelectQuery() {
+		return queryInfo.getType().equals(QueryType.SELECT);
+	}
+
+	private AbstractState createJoinState() {
+		return new GreedyMatchKeywordState(
+				queryInfo,
+				Keywords.JOIN_KEYWORDS,
+				q -> new AnyTokenConsumerState(q, q::addJoinedTable, OptionalWhereState::new)
+		);
 	}
 
 	@Override
 	public boolean isFinalState() {
 		return true;
 	}
-
 }

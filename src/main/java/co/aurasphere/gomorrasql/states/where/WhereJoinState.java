@@ -2,7 +2,7 @@ package co.aurasphere.gomorrasql.states.where;
 
 import java.util.Arrays;
 
-import co.aurasphere.gomorrasql.Keywords;
+import co.aurasphere.gomorrasql.constants.Keywords;
 import co.aurasphere.gomorrasql.model.MannaggGiudException;
 import co.aurasphere.gomorrasql.model.QueryInfo;
 import co.aurasphere.gomorrasql.states.AbstractState;

@@ -1,0 +1,6 @@
+connection:
+  host: localhost
+  port: 5433
+  username: postgres
+  password: password
+  database: gomorra_db

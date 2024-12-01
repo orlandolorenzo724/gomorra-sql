@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.util.stream.Collectors;
@@ -42,12 +43,11 @@ public class GomorraSqlInterpreter {
 
 	private static QueryInfo parseQuery(String query) {
 		AbstractState currentState = new InitialState();
-		// TODO: bug: whitespaces inside quotes should be ignored
-		StringTokenizer tokenizer = new StringTokenizer(query, ", ", true);
-		while (tokenizer.hasMoreTokens()) {
-			String nextToken = tokenizer.nextToken().trim();
-			if (!nextToken.isEmpty()) {
-				currentState = currentState.transitionToNextState(nextToken);
+		List<String> tokens = tokenizeQuery(query);
+
+		for (String token : tokens) {
+			if (!token.isEmpty()) {
+				currentState = currentState.transitionToNextState(token);
 			}
 		}
 
@@ -56,6 +56,31 @@ public class GomorraSqlInterpreter {
 		}
 
 		return currentState.getQueryInfo();
+	}
+
+	private static List<String> tokenizeQuery(String query) {
+		List<String> tokens = new ArrayList<>();
+		boolean inQuotes = false;
+		StringBuilder currentToken = new StringBuilder();
+
+		for (char c : query.toCharArray()) {
+			if (c == '"') {
+				inQuotes = !inQuotes;
+			} else if (Character.isWhitespace(c) && !inQuotes) {
+				if (currentToken.length() > 0) {
+					tokens.add(currentToken.toString());
+					currentToken.setLength(0);
+				}
+			} else {
+				currentToken.append(c);
+			}
+		}
+
+		if (currentToken.length() > 0) {
+			tokens.add(currentToken.toString());
+		}
+
+		return tokens;
 	}
 
 	private static String buildSqlQuery(QueryInfo queryInfo) {
@@ -113,10 +138,10 @@ public class GomorraSqlInterpreter {
 	private static String buildInsertQuery(QueryInfo queryInfo) {
 		StringBuilder query = new StringBuilder("INSERT INTO ").append(queryInfo.getTableName());
 		if (!queryInfo.getColumnNames().isEmpty()) {
-			query.append(" ( ").append(queryInfo.getColumnNames().stream().collect(Collectors.joining(", ")))
+			query.append(" ( ").append(String.join(", ", queryInfo.getColumnNames()))
 					.append(" )");
 		}
-		query.append(" VALUES ( ").append(queryInfo.getValues().stream().collect(Collectors.joining(", ")))
+		query.append(" VALUES ( ").append(String.join(", ", queryInfo.getValues()))
 				.append(" )");
 		return query.toString();
 	}
@@ -125,7 +150,7 @@ public class GomorraSqlInterpreter {
 		String query = "SELECT ";
 
 		// Column names
-		query += queryInfo.getColumnNames().stream().collect(Collectors.joining(", "));
+		query += String.join(", ", queryInfo.getColumnNames());
 
 		// Table name
 		query += " FROM " + queryInfo.getTableName();
@@ -133,7 +158,7 @@ public class GomorraSqlInterpreter {
 		// Joins
 		List<String> joinedTables = queryInfo.getJoinedTables();
 		if (!joinedTables.isEmpty()) {
-			query += " INNER JOIN " + joinedTables.stream().collect(Collectors.joining(" INNER JOIN "));
+			query += " INNER JOIN " + String.join(" INNER JOIN ", joinedTables);
 		}
 		// Where
 		query += buildWhereClause(queryInfo);

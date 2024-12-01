@@ -18,10 +18,10 @@ import co.aurasphere.gomorrasql.model.QueryInfo;
 public class CommaSeparedValuesState extends AbstractState {
 
 	private boolean lastWasComma = false;
-	private List<String> collector;
-	private String nextToken;
-	private Function<QueryInfo, AbstractState> transitionFunction;
-	private String expectedToken;
+	private final List<String> collector;
+	private final String nextToken;
+	private final Function<QueryInfo, AbstractState> transitionFunction;
+	private final String expectedToken;
 	private boolean canBeFinalState = false;
 	private boolean optionalValues = false;
 

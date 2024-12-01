@@ -7,9 +7,11 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 import co.aurasphere.gomorrasql.model.MannaggGiudException;
 import co.aurasphere.gomorrasql.model.GomorraSqlQueryResult;
+import co.aurasphere.gomorrasql.utils.PropertiesUtils;
 
 /**
  * Shell wrapper on the {@link GomorraSqlInterpreter}.
@@ -18,15 +20,28 @@ import co.aurasphere.gomorrasql.model.GomorraSqlQueryResult;
  *
  */
 public class GomorraSqlShell {
+	static Logger logger = Logger.getLogger(GomorraSqlShell.class.getName());
 
 	public static void main(String[] args) throws Exception {
+		boolean isConnectionConfigured = false;
+		String connectionUrl = "";
+		try {
+			connectionUrl = PropertiesUtils.getConnectionString();
+			isConnectionConfigured = true;
+		} catch (Exception e) {
+			logger.info("Could not find a configured database connection inside database.yml");
+		}
+
 		Scanner scanner = new Scanner(System.in, StandardCharsets.ISO_8859_1.name());
-		System.out.print("Insert a JDBC string to connect to a database: ");
-		String url = scanner.nextLine();
-		Connection connection = DriverManager.getConnection(url);
+		if (!isConnectionConfigured) {
+			System.out.print("Insert a JDBC string to connect to a database: ");
+			connectionUrl = scanner.nextLine();
+		}
+
+		Connection connection = DriverManager.getConnection(connectionUrl);
 		GomorraSqlInterpreter gomorraSqlParser = new GomorraSqlInterpreter(connection);
 
-		System.out.println("Succesfully connected to DB");
+		System.out.println("Succesfully connected to DB " + connection.getCatalog());
 		while (true) {
 			try {
 				System.out.print("> ");
