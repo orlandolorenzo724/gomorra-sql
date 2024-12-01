@@ -1,7 +1,6 @@
 package co.aurasphere.gomorrasql.model;
 
-import lombok.Getter;
-import lombok.Setter;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,17 +11,14 @@ import java.util.List;
  * @author Donato Rimenti
  *
  */
-@Getter
 public class QueryInfo {
 
 	public enum QueryType {
 		SELECT, UPDATE, DELETE, INSERT, COMMIT, BEGIN_TRANSACTION, ROLLBACK;
 	}
 
-	@Setter
 	private QueryType type;
 
-	@Setter
 	private String tableName;
 
 	private final List<String> columnNames = new ArrayList<>();
@@ -34,6 +30,42 @@ public class QueryInfo {
 	private final List<String> joinedTables = new ArrayList<>();
 
 	private final List<String> whereConditionsJoinOperators = new ArrayList<>();
+
+	public QueryType getType() {
+		return type;
+	}
+
+	public void setType(QueryType type) {
+		this.type = type;
+	}
+
+	public String getTableName() {
+		return tableName;
+	}
+
+	public void setTableName(String tableName) {
+		this.tableName = tableName;
+	}
+
+	public List<String> getColumnNames() {
+		return columnNames;
+	}
+
+	public List<String> getValues() {
+		return values;
+	}
+
+	public List<WhereCondition> getWhereConditions() {
+		return whereConditions;
+	}
+
+	public List<String> getJoinedTables() {
+		return joinedTables;
+	}
+
+	public List<String> getWhereConditionsJoinOperators() {
+		return whereConditionsJoinOperators;
+	}
 
 	public void addColumnName(String columnName) {
 		this.columnNames.add(columnName);
