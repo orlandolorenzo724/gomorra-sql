@@ -22,7 +22,8 @@ public class GomorraSqlShell {
 	public static void main(String[] args) throws Exception {
 		Scanner scanner = new Scanner(System.in, StandardCharsets.ISO_8859_1.name());
 		System.out.print("Insert a JDBC string to connect to a database: ");
-		String url = scanner.nextLine();
+		// String url = scanner.nextLine();
+		String url = "jdbc:postgresql://localhost:5433/gomorra_db?user=postgres&password=password";
 		Connection connection = DriverManager.getConnection(url);
 		GomorraSqlInterpreter gomorraSqlParser = new GomorraSqlInterpreter(connection);
 
