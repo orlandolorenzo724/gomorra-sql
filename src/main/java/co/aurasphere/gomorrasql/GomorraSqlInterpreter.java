@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.util.stream.Collectors;
@@ -42,12 +43,11 @@ public class GomorraSqlInterpreter {
 
 	private static QueryInfo parseQuery(String query) {
 		AbstractState currentState = new InitialState();
-		// TODO: bug: whitespaces inside quotes should be ignored
-		StringTokenizer tokenizer = new StringTokenizer(query, ", ", true);
-		while (tokenizer.hasMoreTokens()) {
-			String nextToken = tokenizer.nextToken().trim();
-			if (!nextToken.isEmpty()) {
-				currentState = currentState.transitionToNextState(nextToken);
+		List<String> tokens = tokenizeQuery(query);
+
+		for (String token : tokens) {
+			if (!token.isEmpty()) {
+				currentState = currentState.transitionToNextState(token);
 			}
 		}
 
@@ -56,6 +56,31 @@ public class GomorraSqlInterpreter {
 		}
 
 		return currentState.getQueryInfo();
+	}
+
+	private static List<String> tokenizeQuery(String query) {
+		List<String> tokens = new ArrayList<>();
+		boolean inQuotes = false;
+		StringBuilder currentToken = new StringBuilder();
+
+		for (char c : query.toCharArray()) {
+			if (c == '"') {
+				inQuotes = !inQuotes;
+			} else if (Character.isWhitespace(c) && !inQuotes) {
+				if (currentToken.length() > 0) {
+					tokens.add(currentToken.toString());
+					currentToken.setLength(0);
+				}
+			} else {
+				currentToken.append(c);
+			}
+		}
+
+		if (currentToken.length() > 0) {
+			tokens.add(currentToken.toString());
+		}
+
+		return tokens;
 	}
 
 	private static String buildSqlQuery(QueryInfo queryInfo) {

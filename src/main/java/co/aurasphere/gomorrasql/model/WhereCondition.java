@@ -1,39 +1,25 @@
 package co.aurasphere.gomorrasql.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * Represents a statement in a where condition of a GomorraSQL query.
  * 
  * @author Donato Rimenti
  *
  */
+@Getter
 public class WhereCondition {
 
-	private String field;
+	private final String field;
+	@Setter
 	private String value;
+	@Setter
 	private String operator;
 
 	public WhereCondition(String field) {
 		this.field = field;
-	}
-
-	public String getField() {
-		return field;
-	}
-
-	public String getValue() {
-		return value;
-	}
-
-	public void setValue(String value) {
-		this.value = value;
-	}
-
-	public String getOperator() {
-		return operator;
-	}
-
-	public void setOperator(String operator) {
-		this.operator = operator;
 	}
 
 }
