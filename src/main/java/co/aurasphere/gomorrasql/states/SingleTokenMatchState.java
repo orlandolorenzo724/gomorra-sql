@@ -13,8 +13,8 @@ import co.aurasphere.gomorrasql.model.QueryInfo;
  */
 public class SingleTokenMatchState extends AbstractState {
 
-	private String expectedToken;
-	private Function<QueryInfo, AbstractState> transitionFunction;
+	private final String expectedToken;
+	private final Function<QueryInfo, AbstractState> transitionFunction;
 
 	public SingleTokenMatchState(QueryInfo queryInfo, String expectedToken,
 			Function<QueryInfo, AbstractState> transitionFunction) {
