@@ -1,6 +1,6 @@
 package co.aurasphere.gomorrasql.states;
 
-import co.aurasphere.gomorrasql.model.CaggiaFaException;
+import co.aurasphere.gomorrasql.model.MannaggGiudException;
 import co.aurasphere.gomorrasql.model.QueryInfo;
 
 /**
@@ -16,8 +16,8 @@ public class FinalState extends AbstractState {
 	}
 
 	@Override
-	public AbstractState transitionToNextState(String token) throws CaggiaFaException {
-		throw new CaggiaFaException("%END_OF_QUERY%", token);
+	public AbstractState transitionToNextState(String token) throws MannaggGiudException {
+		throw new MannaggGiudException("%END_OF_QUERY%", token);
 	}
 
 	@Override

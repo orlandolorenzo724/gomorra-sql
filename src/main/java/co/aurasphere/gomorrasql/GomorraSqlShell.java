@@ -8,7 +8,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-import co.aurasphere.gomorrasql.model.CaggiaFaException;
+import co.aurasphere.gomorrasql.model.MannaggGiudException;
 import co.aurasphere.gomorrasql.model.GomorraSqlQueryResult;
 
 /**
@@ -42,7 +42,7 @@ public class GomorraSqlShell {
 				if (result.getResultSet() == null && result.getAffectedRows() == null) {
 					System.out.println("OK");
 				}
-			} catch (CaggiaFaException | SQLException e) {
+			} catch (MannaggGiudException | SQLException e) {
 				System.err.println("Error: " + e.getMessage());
 			}
 		}

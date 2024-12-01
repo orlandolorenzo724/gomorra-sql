@@ -1,6 +1,6 @@
 package co.aurasphere.gomorrasql.states.where;
 
-import co.aurasphere.gomorrasql.model.CaggiaFaException;
+import co.aurasphere.gomorrasql.model.MannaggGiudException;
 import co.aurasphere.gomorrasql.model.QueryInfo;
 import co.aurasphere.gomorrasql.model.WhereCondition;
 import co.aurasphere.gomorrasql.states.AbstractState;
@@ -19,7 +19,7 @@ public class WhereFieldState extends AbstractState {
 	}
 
 	@Override
-	public AbstractState transitionToNextState(String token) throws CaggiaFaException {
+	public AbstractState transitionToNextState(String token) throws MannaggGiudException {
 		return new WhereOperatorState(queryInfo, new WhereCondition(token));
 	}
 

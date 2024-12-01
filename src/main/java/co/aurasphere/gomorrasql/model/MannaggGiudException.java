@@ -9,21 +9,21 @@ import java.util.List;
  * @author Donato Rimenti
  *
  */
-public class CaggiaFaException extends RuntimeException {
+public class MannaggGiudException extends RuntimeException {
 
-	public CaggiaFaException(List<String> expectedTokens, String actualToken) {
+	public MannaggGiudException(List<String> expectedTokens, String actualToken) {
 		super("Expected one of " + expectedTokens + " but got [" + actualToken + "]");
 	}
 
-	public CaggiaFaException(String expectedToken, String token) {
+	public MannaggGiudException(String expectedToken, String token) {
 		super("Expected [" + expectedToken + "] but got [" + token + "]");
 	}
 
-	public CaggiaFaException(String message) {
+	public MannaggGiudException(String message) {
 		super(message);
 	}
 
-	public CaggiaFaException(Exception e) {
+	public MannaggGiudException(Exception e) {
 		super(e);
 	}
 

@@ -1,6 +1,6 @@
 package co.aurasphere.gomorrasql.states;
 
-import co.aurasphere.gomorrasql.model.CaggiaFaException;
+import co.aurasphere.gomorrasql.model.MannaggGiudException;
 import co.aurasphere.gomorrasql.model.QueryInfo;
 
 /**
@@ -22,9 +22,9 @@ public abstract class AbstractState {
 	 * 
 	 * @param token the token in the query currently being parsed
 	 * @return the next state
-	 * @throws CaggiaFaException if the token is not allowed in this position
+	 * @throws MannaggGiudException if the token is not allowed in this position
 	 */
-	public abstract AbstractState transitionToNextState(String token) throws CaggiaFaException;
+	public abstract AbstractState transitionToNextState(String token) throws MannaggGiudException;
 
 	/**
 	 * Returns true if the query can end with this state (e.g. if the query can end

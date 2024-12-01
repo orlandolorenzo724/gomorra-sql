@@ -2,7 +2,7 @@ package co.aurasphere.gomorrasql.states;
 
 import java.util.function.Function;
 
-import co.aurasphere.gomorrasql.model.CaggiaFaException;
+import co.aurasphere.gomorrasql.model.MannaggGiudException;
 import co.aurasphere.gomorrasql.model.QueryInfo;
 
 /**
@@ -24,11 +24,11 @@ public class SingleTokenMatchState extends AbstractState {
 	}
 
 	@Override
-	public AbstractState transitionToNextState(String token) throws CaggiaFaException {
+	public AbstractState transitionToNextState(String token) throws MannaggGiudException {
 		if (token.equalsIgnoreCase(expectedToken)) {
 			return transitionFunction.apply(queryInfo);
 		}
-		throw new CaggiaFaException(expectedToken, token);
+		throw new MannaggGiudException(expectedToken, token);
 	}
 
 }

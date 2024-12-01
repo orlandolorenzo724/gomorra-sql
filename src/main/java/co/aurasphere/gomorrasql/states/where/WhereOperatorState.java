@@ -1,7 +1,7 @@
 package co.aurasphere.gomorrasql.states.where;
 
 import co.aurasphere.gomorrasql.Keywords;
-import co.aurasphere.gomorrasql.model.CaggiaFaException;
+import co.aurasphere.gomorrasql.model.MannaggGiudException;
 import co.aurasphere.gomorrasql.model.QueryInfo;
 import co.aurasphere.gomorrasql.model.WhereCondition;
 import co.aurasphere.gomorrasql.states.AbstractState;
@@ -24,7 +24,7 @@ public class WhereOperatorState extends AbstractState {
 	}
 
 	@Override
-	public AbstractState transitionToNextState(String token) throws CaggiaFaException {
+	public AbstractState transitionToNextState(String token) throws MannaggGiudException {
 		if (Keywords.WHERE_OPERATORS.contains(token) || token.equalsIgnoreCase(Keywords.IS_KEYWORD)) {
 			if (token.equalsIgnoreCase(Keywords.IS_NOT_KEYWORDS[0])) {
 				condition.setOperator("IS NOT");
@@ -37,7 +37,7 @@ public class WhereOperatorState extends AbstractState {
 			}
 			return new WhereValueState(queryInfo, condition);
 		}
-		throw new CaggiaFaException(Keywords.WHERE_OPERATORS, token);
+		throw new MannaggGiudException(Keywords.WHERE_OPERATORS, token);
 	}
 
 }

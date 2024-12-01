@@ -3,7 +3,7 @@ package co.aurasphere.gomorrasql.states.query;
 import java.util.Arrays;
 
 import co.aurasphere.gomorrasql.Keywords;
-import co.aurasphere.gomorrasql.model.CaggiaFaException;
+import co.aurasphere.gomorrasql.model.MannaggGiudException;
 import co.aurasphere.gomorrasql.model.QueryInfo;
 import co.aurasphere.gomorrasql.states.AbstractState;
 import co.aurasphere.gomorrasql.states.AnyTokenConsumerState;
@@ -24,7 +24,7 @@ public class UpdateSetState extends AbstractState {
 	}
 
 	@Override
-	public AbstractState transitionToNextState(String token) throws CaggiaFaException {
+	public AbstractState transitionToNextState(String token) throws MannaggGiudException {
 		// Adds another variable
 		if (token.equalsIgnoreCase(",")) {
 			return new AnyTokenConsumerState(queryInfo, queryInfo::addColumnName,
@@ -35,7 +35,7 @@ public class UpdateSetState extends AbstractState {
 		if (token.equalsIgnoreCase(Keywords.WHERE_KEYWORD)) {
 			return new WhereFieldState(queryInfo);
 		}
-		throw new CaggiaFaException(Arrays.asList(",", Keywords.WHERE_KEYWORD, "%END_OF_QUERY%"), token);
+		throw new MannaggGiudException(Arrays.asList(",", Keywords.WHERE_KEYWORD, "%END_OF_QUERY%"), token);
 	}
 
 	@Override

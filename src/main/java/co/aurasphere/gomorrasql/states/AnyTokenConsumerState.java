@@ -3,7 +3,7 @@ package co.aurasphere.gomorrasql.states;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-import co.aurasphere.gomorrasql.model.CaggiaFaException;
+import co.aurasphere.gomorrasql.model.MannaggGiudException;
 import co.aurasphere.gomorrasql.model.QueryInfo;
 
 /**
@@ -26,7 +26,7 @@ public class AnyTokenConsumerState extends AbstractState {
 	}
 
 	@Override
-	public AbstractState transitionToNextState(String token) throws CaggiaFaException {
+	public AbstractState transitionToNextState(String token) throws MannaggGiudException {
 		tokenConsumer.accept(token);
 		return transitionFunction.apply(queryInfo);
 	}

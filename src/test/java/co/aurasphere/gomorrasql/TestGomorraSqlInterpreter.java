@@ -8,7 +8,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import co.aurasphere.gomorrasql.model.CaggiaFaException;
+import co.aurasphere.gomorrasql.model.MannaggGiudException;
 
 public class TestGomorraSqlInterpreter {
 
@@ -24,7 +24,7 @@ public class TestGomorraSqlInterpreter {
 		this.connection.close();
 	}
 
-	@Test(expected = CaggiaFaException.class)
+	@Test(expected = MannaggGiudException.class)
 	public void testWrongDataTypeInsert() throws SQLException {
 		GomorraSqlInterpreter gsi = new GomorraSqlInterpreter(connection);
 		gsi.execute("nzipp 'ngoppa city chist 'RHO', 7");

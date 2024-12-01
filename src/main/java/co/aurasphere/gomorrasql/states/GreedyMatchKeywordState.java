@@ -2,7 +2,7 @@ package co.aurasphere.gomorrasql.states;
 
 import java.util.function.Function;
 
-import co.aurasphere.gomorrasql.model.CaggiaFaException;
+import co.aurasphere.gomorrasql.model.MannaggGiudException;
 import co.aurasphere.gomorrasql.model.QueryInfo;
 
 /**
@@ -34,7 +34,7 @@ public class GreedyMatchKeywordState extends AbstractState {
 	}
 
 	@Override
-	public AbstractState transitionToNextState(String token) throws CaggiaFaException {
+	public AbstractState transitionToNextState(String token) throws MannaggGiudException {
 		if (token.equalsIgnoreCase(keywords[currentIndex])) {
 			currentIndex++;
 			if (currentIndex == keywords.length) {
@@ -42,6 +42,6 @@ public class GreedyMatchKeywordState extends AbstractState {
 			}
 			return this;
 		}
-		throw new CaggiaFaException(keywords[currentIndex], token);
+		throw new MannaggGiudException(keywords[currentIndex], token);
 	}
 }

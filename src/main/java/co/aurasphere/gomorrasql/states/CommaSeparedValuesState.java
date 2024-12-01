@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 
-import co.aurasphere.gomorrasql.model.CaggiaFaException;
+import co.aurasphere.gomorrasql.model.MannaggGiudException;
 import co.aurasphere.gomorrasql.model.QueryInfo;
 
 /**
@@ -45,11 +45,11 @@ public class CommaSeparedValuesState extends AbstractState {
 	}
 
 	@Override
-	public AbstractState transitionToNextState(String token) throws CaggiaFaException {
+	public AbstractState transitionToNextState(String token) throws MannaggGiudException {
 		if (token.equals(",")) {
 			if (lastWasComma) {
 				// Case ", ,"
-				throw new CaggiaFaException(expectedToken, token);
+				throw new MannaggGiudException(expectedToken, token);
 			} else {
 				// Case "%expectedToken% ,"
 				lastWasComma = true;
@@ -75,7 +75,7 @@ public class CommaSeparedValuesState extends AbstractState {
 		}
 
 		// Case "%expectedToken% %WRONG_TOKEN%"
-		throw new CaggiaFaException(Arrays.asList(",", nextToken), token);
+		throw new MannaggGiudException(Arrays.asList(",", nextToken), token);
 	}
 
 	@Override

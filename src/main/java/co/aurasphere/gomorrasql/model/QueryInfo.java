@@ -19,15 +19,15 @@ public class QueryInfo {
 
 	private String tableName;
 
-	private List<String> columnNames = new ArrayList<>();
+	private final List<String> columnNames = new ArrayList<>();
 
-	private List<String> values = new ArrayList<>();
+	private final List<String> values = new ArrayList<>();
 
-	private List<WhereCondition> whereConditions = new ArrayList<>();
+	private final List<WhereCondition> whereConditions = new ArrayList<>();
 
-	private List<String> joinedTables = new ArrayList<>();
+	private final List<String> joinedTables = new ArrayList<>();
 
-	private List<String> whereConditionsJoinOperators = new ArrayList<>();
+	private final List<String> whereConditionsJoinOperators = new ArrayList<>();
 	
 	public QueryType getType() {
 		return type;

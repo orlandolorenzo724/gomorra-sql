@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import co.aurasphere.gomorrasql.Keywords;
-import co.aurasphere.gomorrasql.model.CaggiaFaException;
+import co.aurasphere.gomorrasql.model.MannaggGiudException;
 import co.aurasphere.gomorrasql.model.QueryInfo;
 import co.aurasphere.gomorrasql.model.QueryInfo.QueryType;
 import co.aurasphere.gomorrasql.states.AbstractState;
@@ -27,7 +27,7 @@ public class OptionalWhereState extends AbstractState {
 	}
 
 	@Override
-	public AbstractState transitionToNextState(String token) throws CaggiaFaException {
+	public AbstractState transitionToNextState(String token) throws MannaggGiudException {
 		List<String> expectedKeywords = new ArrayList<>(Arrays.asList(Keywords.WHERE_KEYWORD));
 		if (token.equalsIgnoreCase(Keywords.WHERE_KEYWORD)) {
 			return new WhereFieldState(queryInfo);
@@ -39,7 +39,7 @@ public class OptionalWhereState extends AbstractState {
 						q -> new AnyTokenConsumerState(q, q::addJoinedTable, OptionalWhereState::new));
 			}
 		}
-		throw new CaggiaFaException(expectedKeywords, token);
+		throw new MannaggGiudException(expectedKeywords, token);
 	}
 
 	@Override

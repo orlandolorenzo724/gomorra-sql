@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 import java.util.stream.Collectors;
 
-import co.aurasphere.gomorrasql.model.CaggiaFaException;
+import co.aurasphere.gomorrasql.model.MannaggGiudException;
 import co.aurasphere.gomorrasql.model.GomorraSqlQueryResult;
 import co.aurasphere.gomorrasql.model.QueryInfo;
 import co.aurasphere.gomorrasql.model.WhereCondition;
@@ -52,7 +52,7 @@ public class GomorraSqlInterpreter {
 		}
 
 		if (!currentState.isFinalState()) {
-			throw new CaggiaFaException("Unexpected end of query");
+			throw new MannaggGiudException("Unexpected end of query");
 		}
 
 		return currentState.getQueryInfo();
@@ -75,7 +75,7 @@ public class GomorraSqlInterpreter {
 		case ROLLBACK:
 			return "ROLLBACK";
 		}
-		throw new CaggiaFaException("Unrecognised query");
+		throw new MannaggGiudException("Unrecognised query");
 	}
 
 	private static String buildDeleteQuery(QueryInfo queryInfo) {
@@ -179,7 +179,7 @@ public class GomorraSqlInterpreter {
 				break;
 			}
 		} catch (SQLException e) {
-			throw new CaggiaFaException(e);
+			throw new MannaggGiudException(e);
 		}
 		return result;
 	}

@@ -3,7 +3,7 @@ package co.aurasphere.gomorrasql.states;
 import java.util.Arrays;
 
 import co.aurasphere.gomorrasql.Keywords;
-import co.aurasphere.gomorrasql.model.CaggiaFaException;
+import co.aurasphere.gomorrasql.model.MannaggGiudException;
 import co.aurasphere.gomorrasql.model.QueryInfo;
 import co.aurasphere.gomorrasql.model.QueryInfo.QueryType;
 import co.aurasphere.gomorrasql.states.query.OptionalWhereState;
@@ -24,7 +24,7 @@ public class InitialState extends AbstractState {
 	}
 
 	@Override
-	public AbstractState transitionToNextState(String token) throws CaggiaFaException {
+	public AbstractState transitionToNextState(String token) throws MannaggGiudException {
 		if (token.equalsIgnoreCase(Keywords.SELECT_KEYWORD)) {
 			queryInfo.setType(QueryType.SELECT);
 			return new SelectColumnsState(queryInfo);
@@ -63,7 +63,7 @@ public class InitialState extends AbstractState {
 			queryInfo.setType(QueryType.BEGIN_TRANSACTION);
 			return new GreedyMatchKeywordState(queryInfo, Keywords.BEGIN_TRANSACTION_KEYWORDS, FinalState::new);
 		}
-		throw new CaggiaFaException(Arrays.asList(Keywords.SELECT_KEYWORD, Keywords.UPDATE_KEYWORD,
+		throw new MannaggGiudException(Arrays.asList(Keywords.SELECT_KEYWORD, Keywords.UPDATE_KEYWORD,
 				Keywords.INSERT_KEYWORDS[0], Keywords.DELETE_KEYWORDS[0], Keywords.BEGIN_TRANSACTION_KEYWORDS[0],
 				Keywords.COMMIT_KEYWORDS[0], Keywords.ROLLBACK_KEYWORD), token);
 	}
